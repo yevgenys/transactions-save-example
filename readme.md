@@ -40,6 +40,8 @@ Returns:
 Get sum
 -----------
 
+GET /transactionservice/sum/$transaction_id
+
 Returns:
 { "status": String, sum: double }
 

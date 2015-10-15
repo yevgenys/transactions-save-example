@@ -1,6 +1,6 @@
 Description
 =========
-RESTful web service based on spring-oot + gradle. 
+RESTful web service based on spring-boot + gradle. 
 Service stores some transactions(in memory) and returns information about those transactions.
 
 Api details

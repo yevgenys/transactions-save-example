@@ -14,10 +14,10 @@ Body:
 { "amount":double,"type":string,"parent_id":long }
 
 where:
-  __transaction_id__ is a long specifying a new transaction
-  __amount__ is a double specifying the amount
-  __type__ is a string specifying a type of the transaction.
-  __parent_id__ is an optional long that may specify the parent transaction of this transaction.
+* __transaction_id__ is a long specifying a new transaction
+* __amount__ is a double specifying the amount
+* __type__ is a string specifying a type of the transaction.
+* __parent_id__ is an optional long that may specify the parent transaction of this transaction.
 
 returns:
 {"status": String}

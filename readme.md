@@ -53,7 +53,7 @@ GET /transactionservice/sum/$transaction_id
 
 _Returns:_
 ``` json
-{ "status": "$string", sum: "$double" }
+{ "status": "$string", "sum": "$double" }
 ```
 
 Examples
@@ -66,11 +66,11 @@ PUT /transactionservice/transaction/11 --data { "amount": 10000, "type": "shoppi
 => { "status": "ok" }
 
 GET /transactionservice/types/cars 
-=> [10]
+=> { "status": "ok", "ids": [10] }
 
 GET /transactionservice/sum/10 
-=> {"sum":15000}
+=> { "status": "ok", "sum": 15000 }
 
 GET /transactionservice/sum/11
-=> {"sum":10000}
+=> { "status": "ok", "sum":10000 }
 ```

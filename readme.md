@@ -43,7 +43,7 @@ GET /transactionservice/types/$type
 
 _Returns:_
 ``` json
-{ "status": "$string, ids: "$long[]" }
+{ "status": "$string", "ids": "$long[]" }
 ```
 
 Get sum

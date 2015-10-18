@@ -13,18 +13,18 @@ import java.util.List;
 @Service
 public class TransactionService {
 
+    private static final Logger logger = Logger.getLogger(TransactionService.class);
     @Autowired private Dao dao;
     @Autowired private TransactionServiceVerifier verifier;
 
-    private static final Logger logger = Logger.getLogger(TransactionService.class);
-
-    public void update(final long id, final Transaction transaction){
+    public void update(final long id, final Transaction transaction) {
         try {
             logger.info("Updating transaction with id = " + id);
             logger.debug("transaction = " + transaction.toString());
             verifier.verifyNewTransaction(transaction, id);
+            addChildIfNeeded(transaction, id);
             dao.put(id, transaction);
-        }catch(VerificationError e){
+        } catch(VerificationError e) {
             throw new ServiceError(e);
         }
     }
@@ -35,21 +35,28 @@ public class TransactionService {
             Transaction transaction = dao.get(id);
             verifier.verifyExistTransaction(transaction, id);
             return transaction;
-        }catch(VerificationError e){
+        } catch(VerificationError e) {
             throw new ServiceError(e);
         }
     }
 
-    public List<Long> getIds(final String type){
+    public List<Long> getIds(final String type) {
         logger.info("Getting all ids for type = " + type);
         return dao.getIds(type);
     }
 
     public double getSum(long id) {
         Transaction transaction = dao.get(id);
-        if(transaction.parent_id == Transaction.NO_PARENT){
+        if(transaction.child_id == Transaction.NO_CHILD) {
             return transaction.amount;
         }
-        return transaction.amount + getSum(transaction.parent_id);
+        return transaction.amount + getSum(transaction.child_id);
+    }
+
+    private void addChildIfNeeded(final Transaction transaction, final long id) {
+        if(transaction.parent_id != Transaction.NO_PARENT) {
+            Transaction parentTransaction = dao.get(transaction.parent_id);
+            parentTransaction.child_id = id;
+        }
     }
 }

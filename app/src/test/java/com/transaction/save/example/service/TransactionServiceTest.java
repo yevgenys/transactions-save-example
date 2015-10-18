@@ -22,13 +22,13 @@ public class TransactionServiceTest extends BaseTestClass {
 
     @Mock private Dao dao;
     @Mock private TransactionServiceVerifier verifier;
-    @Mock private Transaction transaction;
+    private Transaction transaction;
     private Transaction daoTransaction;
     @InjectMocks private TransactionService service = new TransactionService();
 
     @Before
     public void setUp() throws Exception {
-        initDaoTransaction();
+        initTransactions();
     }
 
     @Test
@@ -85,9 +85,9 @@ public class TransactionServiceTest extends BaseTestClass {
     public void testCalculateSum() throws Exception {
         long lastId = 2;
         Transaction tr1 = getTransaction();
-        Transaction tr2 = getTransaction(1);
-        Transaction tr3 = getTransaction(lastId);
-        mockDao(tr3, tr2, tr1);
+        Transaction tr2 = getTransaction(tr1, 1);
+        Transaction tr3 = getTransaction(tr2, lastId);
+        mockDao(tr1, tr2, tr3);
         final double sum = service.getSum(lastId);
         final double expectedSum = AMOUNT * 3;
         assertThat(sum).isEqualTo(expectedSum);
@@ -103,13 +103,15 @@ public class TransactionServiceTest extends BaseTestClass {
         return transaction;
     }
 
-    private Transaction getTransaction(final long id){
+    private Transaction getTransaction(Transaction parentTransaction, final long id){
         Transaction transaction = getTransaction();
         transaction.parent_id = id;
+        parentTransaction.child_id = id - 1;
         return transaction;
     }
 
-    private void initDaoTransaction() {
+    private void initTransactions() {
+        transaction = getTransaction();
         daoTransaction = getTransaction();
     }
 

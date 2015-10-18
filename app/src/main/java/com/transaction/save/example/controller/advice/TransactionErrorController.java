@@ -1,8 +1,8 @@
 package com.transaction.save.example.controller.advice;
 
-import com.transaction.save.example.controller.transformer.ErrorTransformer;
 import com.transaction.save.example.controller.response.Response;
-import com.transaction.save.example.verifier.VerificationError;
+import com.transaction.save.example.controller.transformer.ErrorTransformer;
+import com.transaction.save.example.service.ServiceError;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,11 +17,11 @@ public class TransactionErrorController {
 
     @Autowired private ErrorTransformer transformer;
 
-    @ExceptionHandler(value = VerificationError.class)
+    @ExceptionHandler(value = ServiceError.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public Response verificationError(VerificationError e){
-        logger.warn("Got verification exception: " + e.getMessage());
+    public Response verificationError(ServiceError e){
+        logger.warn("Got ServiceError exception: " + e.getMessage());
         return transformer.transform(e);
     }
 }

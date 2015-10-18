@@ -1,9 +1,7 @@
-package com.transaction.save.example.controller.verify;
+package com.transaction.save.example.verifier;
 
 import com.transaction.save.example.BaseTestClass;
 import com.transaction.save.example.model.Transaction;
-import com.transaction.save.example.verifier.TransactionControllerVerifier;
-import com.transaction.save.example.verifier.VerificationError;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

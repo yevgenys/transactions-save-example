@@ -103,7 +103,7 @@ public class TransactionServiceTest extends BaseTestClass {
         return transaction;
     }
 
-    private Transaction getTransaction(Transaction parentTransaction, final long id){
+    private Transaction getTransaction(Transaction parentTransaction, final long id) {
         Transaction transaction = getTransaction();
         transaction.parent_id = id;
         parentTransaction.child_id = id - 1;

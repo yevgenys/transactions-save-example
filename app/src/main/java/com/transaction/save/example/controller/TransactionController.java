@@ -3,10 +3,11 @@ package com.transaction.save.example.controller;
 import com.transaction.save.example.controller.response.Response;
 import com.transaction.save.example.controller.response.SuccessResponse;
 import com.transaction.save.example.controller.transformer.TransactionTransformer;
-import com.transaction.save.example.verifier.TransactionControllerVerifier;
 import com.transaction.save.example.model.Transaction;
 import com.transaction.save.example.service.TransactionService;
-import org.apache.log4j.Logger;
+import com.transaction.save.example.verifier.TransactionControllerVerifier;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("transactionservice/")
 public class TransactionController {
-    private static final Logger logger = Logger.getLogger(TransactionController.class);
+    private static final Logger logger = LogManager.getLogger(TransactionController.class);
 
     @Autowired private TransactionControllerVerifier verifier;
     @Autowired private TransactionService transactionService;

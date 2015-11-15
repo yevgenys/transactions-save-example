@@ -4,7 +4,8 @@ import com.transaction.save.example.dao.Dao;
 import com.transaction.save.example.model.Transaction;
 import com.transaction.save.example.verifier.TransactionServiceVerifier;
 import com.transaction.save.example.verifier.VerificationError;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Service
 public class TransactionService {
 
-    private static final Logger logger = Logger.getLogger(TransactionService.class);
+    private static final Logger logger = LogManager.getLogger(TransactionService.class);
     @Autowired private Dao dao;
     @Autowired private TransactionServiceVerifier verifier;
 
